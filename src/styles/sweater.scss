@@ -1,0 +1,16 @@
+.sweater-container {
+  width: 210px;
+  height: 180px;
+  position: absolute;
+}
+
+.sweater {
+  height: 100%;
+  width: 100%;
+
+  img {
+    object-fit: contain;
+    height: 100%;
+    width: 100% !important;
+  }
+}
