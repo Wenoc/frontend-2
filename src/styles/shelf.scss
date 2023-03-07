@@ -1,0 +1,19 @@
+.shelf {
+  max-width: 300px;
+
+  img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1270px) {
+  .shelf {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 1030px) {
+  .shelf {
+    max-width: 250px;
+  }
+}

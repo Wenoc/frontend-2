@@ -55,6 +55,13 @@ header {
   width: 1200px;
 }
 
+.shelves {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 @media (max-width: 1270px) {
   .akaszto {
     zoom: 80%;
