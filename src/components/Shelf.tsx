@@ -25,11 +25,12 @@ function Shelf(props: any) {
     <div className={"shelf"} onDragOver={enableDropping} onDrop={handleDrop}>
       <div className="foldedSweaters">
         {sw_shelf.map((sw) => (
-          <img key={String(sw)} src={String(sw).replace("sweater", "folded")} />
+          <img key={String(sw)} src={String(sw).replace("sweater", "folded")} draggable={false}/>
         ))}
       </div>
       <img src={shelfImg} alt="" draggable="false" />
       <p className="num">{sw_shelf.length}</p>
+      <p className="alapitvany">{props.nev}</p>
     </div>
   );
 }

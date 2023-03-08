@@ -6,9 +6,20 @@
   justify-content: center;
 
   .num{
-    font-size: 32px;
+    color: white;
+    font-size: 48px;
     font-weight: 600;
     margin: 0;
+  }
+
+  .alapitvany{
+    color: gray;
+    font-size: 32px;
+    text-align: center;
+    font-weight: 600;
+    margin: 0;
+    height: 4rem;
+    line-height: 2rem;
   }
 
   img {
