@@ -1,9 +1,15 @@
+
 import "../styles/sweater.scss";
 
 function Sweater(props: any) {
+
   const url = props.url;
   const ml = props.ml;
   const pt = props.pt;
+
+  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    event.dataTransfer.setData('text', url);
+  };
 
   return (
     <div
@@ -14,7 +20,13 @@ function Sweater(props: any) {
       }}
     >
       <div className="sweater">
-        <img src={url} alt="" height={"100px"} />
+        <img
+          src={url}
+          alt=""
+          height={"100px"}
+          draggable="true"
+          onDragStart={handleDragStart}
+        />
       </div>
     </div>
   );
