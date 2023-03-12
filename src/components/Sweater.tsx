@@ -1,14 +1,12 @@
-
 import "../styles/sweater.scss";
 
 function Sweater(props: any) {
-
   const url = props.url;
   const ml = props.ml;
   const pt = props.pt;
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
-    event.dataTransfer.setData('text', url);
+    event.dataTransfer.setData("text", url);
   };
 
   return (

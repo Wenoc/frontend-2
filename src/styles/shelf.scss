@@ -5,14 +5,14 @@
   align-items: center;
   justify-content: center;
 
-  .num{
+  .num {
     color: white;
     font-size: 48px;
     font-weight: 600;
     margin: 0;
   }
 
-  .alapitvany{
+  .alapitvany {
     color: gray;
     font-size: 32px;
     text-align: center;
@@ -27,18 +27,17 @@
   }
 }
 
-.foldedSweaters{
+.foldedSweaters {
   margin-bottom: -4px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column-reverse;
 
-  img{
+  img {
     width: 140px;
     margin-bottom: -3px;
   }
-
 }
 
 @media (max-width: 1270px) {
