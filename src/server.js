@@ -16,7 +16,7 @@ app.post('/save', (req, res) => {
   const { dataToSave } = req.body;
 
   // Read the existing data from the file
-  fs.readFile(path.join(__dirname, '../public/kuldesek.json'), 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, '../src/assets/kuldesek.json'), 'utf8', (err, data) => {
     if (err && err.code !== 'ENOENT') { // Ignore "file not found" error
       console.error(err);
       res.status(500).send('Error reading data');
@@ -40,7 +40,7 @@ app.post('/save', (req, res) => {
     jsonData.push(dataToSave);
 
     // Write the updated array back to the file
-    fs.writeFile(path.join(__dirname, '../public/kuldesek.json'), JSON.stringify(jsonData), (err) => {
+    fs.writeFile(path.join(__dirname, '../src/assets/kuldesek.json'), JSON.stringify(jsonData), (err) => {
       if (err) {
         console.error(err);
         res.status(500).send('Error saving data');

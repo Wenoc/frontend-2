@@ -75,6 +75,20 @@ header {
   width: 1200px;
 }
 
+.dataBtn {
+  color: white;
+  background-color: rgb(97, 153, 13);
+  padding: 0.5rem 1rem;
+  font-size: 1.4rem;
+  border: 2px solid white;
+  border-radius: 22px;
+
+  &:hover {
+    background-color: rgb(119, 180, 26);
+    cursor: pointer;
+  }
+}
+
 .shelves {
   height: 340px;
   display: flex;
@@ -82,10 +96,14 @@ header {
   align-items: flex-end;
 }
 
-.gomb {
-  margin-top: 2rem;
+.buttons {
+  margin-top: 3rem;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
 }
 
 .clear {
