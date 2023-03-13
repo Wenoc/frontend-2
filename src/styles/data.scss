@@ -1,6 +1,7 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  max-width: 1400px;
 }
 
 th,
@@ -21,15 +22,15 @@ th {
   color: rgba(0, 0, 0, 0.788);
 }
 
-.chart{
+.chart {
   max-width: 1000px;
   max-height: 500px;
 }
-.deleteRow{
+.deleteRow {
   text-align: center;
   color: rgb(173, 6, 6);
 
-  span:hover{
+  span:hover {
     cursor: pointer;
   }
 }

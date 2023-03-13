@@ -1,19 +1,17 @@
-import { useState } from "react";
-import savedData from "../assets/kuldesek.json";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
+import { Link } from "react-router-dom";
 
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import e from "express";
-
+} from "chart.js";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -35,26 +33,109 @@ interface Entry {
 }
 
 function Data() {
-  const [data, setData] = useState<Entry[]>(savedData);
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [data, setData] = useState<Entry[]>(null);
+  const sum: { [key: string]: number } = {};
+  const [foundationData, setFoundationData] = useState([0, 0, 0, 0]);
+  const [mostRecent, setMostRecent] = useState(new Date());
 
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axios.get("http://165.22.23.123/data");
+        const d = res.data;
+        setData(d);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getData();
+  }, []);
+
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [currentPage, setCurrentPage] = useState(0);
   const rowsPerPage = 10;
   const startRow = currentPage * rowsPerPage;
   const endRow = startRow + rowsPerPage;
 
-  const sum: { [key: string]: number } = {};
-  data.forEach((item, index) => {
-    item.foundationData.forEach((foundation) => {
-      const name = foundation.name;
-      const value = foundation.value;
-      if (sum[name]) {
-        sum[name] += value;
-      } else {
-        sum[name] = value;
+  const labels = [
+    "Szent Istvan Kiraly Alapitvany",
+    "Autizmus Alapitvany",
+    "Elelmiszer Bank Egyesulet",
+    "Lampas '97 Alapitvany",
+  ];
+
+  const [chartData, setChartData] = useState({
+    labels: labels,
+    datasets: [
+      {
+        label: "Pulcsik száma az alapítványoknak",
+        data: [
+          sum["Szent Istvan Kiraly Alapitvany"],
+          sum["Autizmus Alapitvany"],
+          sum["Elelmiszer Bank Egyesulet"],
+          sum["Lampas '97 Alapitvany"],
+        ],
+        backgroundColor: ["rgb(153, 102, 255)"],
+        borderColor: ["rgb(153, 102, 255)"],
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const sumData = () => {
+    data.forEach((item) => {
+      item.foundationData.forEach((foundation) => {
+        const name = foundation.name;
+        const value = foundation.value;
+        if (sum[name]) {
+          sum[name] += value;
+        } else {
+          sum[name] = value;
+        }
+      });
+    });
+  };
+
+  const handleRecentlySent = () => {
+    setMostRecent(new Date(data[0].time));
+    data.forEach((entry) => {
+      if (mostRecent > new Date(entry.time)) {
+        setMostRecent(new Date(entry.time));
       }
     });
-  });
+  };
+
+  useEffect(() => {
+    if (data) {
+      sumData();
+      setChartData({
+        labels: labels,
+        datasets: [
+          {
+            label: "Pulcsik száma az alapítványoknak",
+            data: [
+              sum["Szent Istvan Kiraly Alapitvany"],
+              sum["Autizmus Alapitvany"],
+              sum["Elelmiszer Bank Egyesulet"],
+              sum["Lampas '97 Alapitvany"],
+            ],
+            backgroundColor: ["rgb(153, 102, 255)"],
+            borderColor: ["rgb(153, 102, 255)"],
+            borderWidth: 1,
+          },
+        ],
+      });
+
+      handleRecentlySent();
+
+      setFoundationData([
+        sum["Szent Istvan Kiraly Alapitvany"],
+        sum["Autizmus Alapitvany"],
+        sum["Elelmiszer Bank Egyesulet"],
+        sum["Lampas '97 Alapitvany"],
+      ]);
+    }
+  }, [data]);
 
   const handleSort = () => {
     if (sortOrder === "asc") {
@@ -70,58 +151,49 @@ function Data() {
     }
   };
 
-  const handleDelete = async (event) => {
+  const handleDelete = async (event: any) => {
     const id = event.target.id;
     try {
-      await axios.post("http://localhost:5000/delete", {
+      await axios.post("http://165.22.23.123/delete", {
         id,
       });
-      console.log("Deleted")
+      console.log("Deleted");
     } catch (error) {
       console.error(error);
     }
     window.location.reload();
+  };
+
+  if (!data) {
+    return <div>loading..</div>;
   }
 
-
-  const labels = ['Szent Istvan Kiraly Alapitvany', 'Autizmus Alapitvany', 'Elelmiszer Bank Egyesulet', "Lampas '97 Alapitvany"];
-  const [chartData, setChartData] = useState({
-    labels: labels,
-    datasets: [{
-      label: 'Polok szama az alapitvanyoknak',
-      data: [sum["Szent Istvan Kiraly Alapitvany"], sum["Autizmus Alapitvany"], sum["Elelmiszer Bank Egyesulet"], sum["Lampas '97 Alapitvany"]],
-      backgroundColor: [
-        'rgb(153, 102, 255)'
-      ],
-      borderColor: [
-        'rgb(153, 102, 255)'
-      ],
-      borderWidth: 1
-    }]
-  });
+  if (data.length === 0) {
+    return <div>nincsenek adat</div>;
+  }
 
   return (
     <div className="dataPage">
+      <Link to={"/"}>
+        <button>Vissza</button>
+      </Link>
       <p>
-        Kuldesek szama: <span>{data.length}</span>
+        Küldések száma: <span>{data.length}</span>
       </p>
-      <p>Osszes Adat:</p>
-      <span>
-        Szent Istvan Kiraly Alapitvany: {sum["Szent Istvan Kiraly Alapitvany"]}
-      </span>
+      <span>Szent Istvan Kiraly Alapitvany: {foundationData[0]}</span>
       <br />
-      <span>Autizmus Alapitvany: {sum["Autizmus Alapitvany"]}</span>
+      <span>Autizmus Alapitvany: {foundationData[1]}</span>
       <span>
         <br />
-        lelmiszer Bank Egyesulet: {sum["Elelmiszer Bank Egyesulet"]}
+        lelmiszer Bank Egyesulet: {foundationData[2]}
       </span>
       <br />
-      <span>Lampas '97 Alapitvany: {sum["Lampas '97 Alapitvany"]}</span>
+      <span>Lampas '97 Alapitvany: {foundationData[3]}</span>
       <br />
       <p>
-        Utolso kuldes:
+        Utolsó küldés:{" "}
         <span>
-          {new Date(data[data.length - 1].time).toLocaleString("en-US", {
+          {mostRecent.toLocaleString("en-US", {
             timeZone: "Europe/Belgrade",
           })}
         </span>
@@ -130,7 +202,7 @@ function Data() {
         <table>
           <thead>
             <tr>
-              <th onClick={handleSort}>Date</th>
+              <th onClick={handleSort}>Dátum</th>
               <th>IP</th>
               <th>Szent Istvan Kiraly Alapitvany</th>
               <th>Autizmus Alapitvany</th>
@@ -160,7 +232,11 @@ function Data() {
                       foundation.value}
                   </td>
                 ))}
-                <td className="deleteRow"><span id={entry.time} onClick={handleDelete}>Del</span></td>
+                <td className="deleteRow">
+                  <span id={entry.time} onClick={handleDelete}>
+                    Del
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -179,8 +255,7 @@ function Data() {
             Next
           </button>
         </div>
-
-        <Bar className="chart" data={chartData} />;
+        <Bar className="chart" data={chartData} />
       </div>
     </div>
   );

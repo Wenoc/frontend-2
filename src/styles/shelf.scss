@@ -28,7 +28,7 @@
   }
 }
 
-.shelf-img{
+.shelf-img {
   margin-top: -4px;
   width: 300px !important;
   user-select: none;
@@ -38,7 +38,6 @@
   -ms-user-select: none;
 }
 
-
 .foldedSweaters {
   margin-bottom: -4px;
   display: flex;
@@ -47,7 +46,7 @@
   flex-direction: column-reverse;
 
   .folded {
-    width: 140px;
+    width: 130px;
     margin-bottom: -3px;
   }
 }
@@ -61,7 +60,7 @@
 @media (max-width: 1030px) {
   .shelf {
     max-width: none;
-    min-height: 240px;
+    min-height: 200px;
     gap: 20px;
     min-width: 610px;
 
@@ -69,20 +68,20 @@
     align-items: flex-end;
     justify-content: flex-start;
 
-    .alapitvany{
+    .alapitvany {
       width: 300px;
       text-align: left;
     }
 
-    .folded{
-      max-width: 120px;
+    .folded {
+      max-width: 100px;
     }
 
-    .shelf-img{
+    .shelf-img {
       max-width: 220px;
     }
 
-    .num{
+    .num {
       min-width: 50px;
     }
   }

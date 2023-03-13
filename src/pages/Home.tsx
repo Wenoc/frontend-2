@@ -24,7 +24,7 @@ function Home() {
   };
 
   const handleResetSweaters = () => {
-    setSelectedSweaterUrl("")
+    setSelectedSweaterUrl("");
     setSweaters(sweaterData);
     setResetSweaters(!resetSweaters);
   };
@@ -57,7 +57,7 @@ function Home() {
               foundationData: shelfData,
             };
 
-            await axios.post("http://localhost:5000/save", {
+            await axios.post("http://165.22.23.123/save", {
               dataToSave,
             });
             console.log("Sending successful!");
@@ -82,15 +82,18 @@ function Home() {
   };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    SetIsDraggingFromShelf(false)
+    SetIsDraggingFromShelf(false);
     if (event.dataTransfer.getData("id") === "folded") {
-      const id = event.dataTransfer.getData("text").replace("folded", "sweater").slice(22);
+      const id = event.dataTransfer
+        .getData("text")
+        .replace("folded", "sweater")
+        .slice(22);
 
-      sweaterData.forEach(sw => {
-        if(sw.url == id){
-          setSweaters(sweaters => [...sweaters, sw])
+      sweaterData.forEach((sw) => {
+        if (sw.url == id) {
+          setSweaters((sweaters) => [...sweaters, sw]);
         }
-      })
+      });
     }
   };
 
@@ -98,9 +101,9 @@ function Home() {
     event.preventDefault();
   };
 
-  const handleDragFromShelf =(value: boolean) => {
-    SetIsDraggingFromShelf(value)
-  }
+  const handleDragFromShelf = (value: boolean) => {
+    SetIsDraggingFromShelf(value);
+  };
 
   return (
     <div>
@@ -109,8 +112,12 @@ function Home() {
       </header>
       <section className="main">
         <div className="akaszto">
-          <img className="akaszto-kep"src={akaszto} alt=""/>
-          <div onDragOver={enableDropping} onDrop={handleDrop} className={(isDraggingFromShelf ? 'showLayer' : 'hideLayer')}></div>
+          <img className="akaszto-kep" src={akaszto} alt="" />
+          <div
+            onDragOver={enableDropping}
+            onDrop={handleDrop}
+            className={isDraggingFromShelf ? "showLayer" : "hideLayer"}
+          ></div>
           {sweaters.length == 0 && (
             <button className="sendBtn" onClick={saveData}>
               Elkuldes
@@ -123,11 +130,10 @@ function Home() {
                 url={sweater.url}
                 ml={sweater.ml}
                 pt={sweater.pt}
-                zi = {sweater.z}
+                zi={sweater.z}
               />
             ))}
           </div>
-          
         </div>
         <div className="shelves">
           {foundationsData.map((foundation, index) => (
