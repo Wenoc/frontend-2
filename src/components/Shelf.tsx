@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import infoIcon from "../assets/infoIcon.png";
 import shelfImg from "../assets/shelf.png";
 import "../styles/shelf.scss";
+import Popup from "./Popup";
 
 function Shelf(props: {
   callback: boolean;
@@ -8,10 +10,14 @@ function Shelf(props: {
   onSelectedSweaterUrlChange: Function;
   resetSweaters: boolean;
   name: string;
+  description: string;
+  website: string;
   sweatersOnAkaszto: any;
   handleDragFromShelf: Function;
 }) {
   const [sw_shelf, set_sw_shelf] = useState(Array);
+  const [isHovered, SetIsHoevered] = useState(false);
+  const [infoPopup, setInfoPopup] = useState(false);
 
   const enableDropping = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -35,16 +41,17 @@ function Shelf(props: {
 
   useEffect(() => {
     const sweatersOnAkasztoUrls = [];
-    props.sweatersOnAkaszto.forEach(element => {
-      sweatersOnAkasztoUrls.push(element.url)
+    props.sweatersOnAkaszto.forEach((element) => {
+      sweatersOnAkasztoUrls.push(element.url);
     });
 
-    const tempArray = sw_shelf.filter( ( el ) => !sweatersOnAkasztoUrls.includes( el ) );
+    const tempArray = sw_shelf.filter(
+      (el) => !sweatersOnAkasztoUrls.includes(el)
+    );
 
     props.onSelectedSweaterUrlChange("");
 
-    set_sw_shelf(tempArray)
-
+    set_sw_shelf(tempArray);
   }, [props.sweatersOnAkaszto]);
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
@@ -52,13 +59,30 @@ function Shelf(props: {
     props.handleDragFromShelf(true);
   };
 
+  const closePopup = () => {
+    setInfoPopup(false);
+  };
+
+  useEffect(() => {
+    if (infoPopup) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  }, [infoPopup]);
+
   return (
-    <div className={"shelf"} onDragOver={enableDropping} onDrop={handleDrop} onDragEnd={() => props.handleDragFromShelf(false)}>
+    <div
+      className={"shelf"}
+      onDragOver={enableDropping}
+      onDrop={handleDrop}
+      onDragEnd={() => props.handleDragFromShelf(false)}
+    >
       <div className="foldedSweaters">
-      <img src={shelfImg} alt="" draggable="false" className="shelf-img"/>
+        <img src={shelfImg} alt="" draggable="false" className="shelf-img" />
         {sw_shelf.map((sw) => (
           <img
-          className="folded"
+            className="folded"
             id={String(sw)}
             onDragStart={handleDragStart}
             key={String(sw)}
@@ -67,8 +91,39 @@ function Shelf(props: {
           />
         ))}
       </div>
-      <p className="num">{sw_shelf.length}</p>
+      <p
+        className="num"
+        onMouseEnter={() => SetIsHoevered(true)}
+        onMouseLeave={() => SetIsHoevered(false)}
+      >
+        {sw_shelf.length}
+      </p>
+      <span>
+        <span className={isHovered ? "showPopup" : "hidePopup"}>
+          {sw_shelf.length != 0 && <Popup sweaters={sw_shelf} />}
+        </span>
+      </span>
       <p className="alapitvany">{props.name}</p>
+      <div className="infoContainer">
+        <div className="website">
+          <span>{props.website}</span>
+        </div>
+        <div className="infoBtn" onClick={() => setInfoPopup(true)}>
+          <img src={infoIcon} alt="" />
+        </div>
+
+        {infoPopup && (
+          <div className="infoPopup">
+            <div className="InfoPopupContent">
+              <div className="popupClose" onClick={closePopup}>
+                X
+              </div>
+              <h2>{props.name}</h2>
+              <p>{props.description}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

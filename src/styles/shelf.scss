@@ -1,10 +1,15 @@
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
+
 .shelf {
   max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  min-height: 400px;
+  min-height: 500px;
 
   .num {
     color: white;
@@ -25,6 +30,86 @@
 
   img {
     width: 100%;
+  }
+}
+
+.infoPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
+}
+
+.InfoPopupContent {
+  position: relative;
+  background-color: white;
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  z-index: 101;
+}
+
+.popupClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.showInfoPopup {
+  display: block;
+}
+
+.hideInfoPopup {
+  display: none;
+}
+
+.infoContainer {
+  position: relative;
+}
+
+.website {
+  background-color: #0d304b;
+  padding: 0.4rem 1rem;
+  padding-left: 2rem;
+  border-radius: 20px;
+  border: 2px solid white;
+  color: white;
+  margin-top: 12px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.num {
+  cursor: pointer;
+}
+
+.infoBtn {
+  position: absolute;
+  top: 8px;
+  left: -16px;
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+  border-radius: 50%;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 22px;
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -51,18 +136,31 @@
   }
 }
 
+.showPopup {
+  display: inline;
+  flex: none;
+}
+
+.hidePopup {
+  display: none;
+}
+
 @media (max-width: 1270px) {
   .shelf {
     max-width: 250px;
   }
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1070px) {
+  .website {
+    margin-bottom: 12px;
+  }
+
   .shelf {
     max-width: none;
     min-height: 200px;
     gap: 20px;
-    min-width: 610px;
+    min-width: 850px;
 
     flex-direction: row-reverse;
     align-items: flex-end;
