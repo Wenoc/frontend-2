@@ -1,18 +1,27 @@
-import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
-import React, { useState } from "react";
-import { Pie } from "react-chartjs-2";
+import { useState } from "react";
 import savedData from "../assets/kuldesek.json";
 
+interface FoundationData {
+  name: string;
+  value: number;
+}
+
+interface Entry {
+  time: string;
+  ip: string;
+  foundationData: FoundationData[];
+}
+
 function Data() {
-  const [data, setData] = useState(savedData);
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [data, setData] = useState<Entry[]>(savedData);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   const [currentPage, setCurrentPage] = useState(0);
   const rowsPerPage = 10;
   const startRow = currentPage * rowsPerPage;
   const endRow = startRow + rowsPerPage;
 
-  const sum = {};
+  const sum: { [key: string]: number } = {};
   data.forEach((item) => {
     item.foundationData.forEach((foundation) => {
       const name = foundation.name;
@@ -28,19 +37,16 @@ function Data() {
   const handleSort = () => {
     if (sortOrder === "asc") {
       setSortOrder("desc");
-      data.sort((a, b) => new Date(b.time) - new Date(a.time));
+      data.sort(
+        (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime()
+      );
     } else {
       setSortOrder("asc");
-      data.sort((a, b) => new Date(a.time) - new Date(b.time));
+      data.sort(
+        (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime()
+      );
     }
   };
-
-  const serbiaTimeString = new Date(data[data.length - 1].time).toLocaleString(
-    "en-US",
-    {
-      timeZone: "Europe/Belgrade",
-    }
-  );
 
   return (
     <div className="dataPage">
@@ -61,7 +67,12 @@ function Data() {
       <span>Lampas '97 Alapitvany: {sum["Lampas '97 Alapitvany"]}</span>
       <br />
       <p>
-        Utolso kuldes: <span>{serbiaTimeString}</span>
+        Utolso kuldes:
+        <span>
+          {new Date(data[data.length - 1].time).toLocaleString("en-US", {
+            timeZone: "Europe/Belgrade",
+          })}
+        </span>
       </p>
       <div>
         <table>
@@ -84,48 +95,32 @@ function Data() {
                   })}
                 </td>
                 <td>{entry.ip}</td>
-                <td>
-                  {
-                    entry.foundationData.find(
-                      (d) => d.name === "Szent Istvan Kiraly Alapitvany"
-                    ).value
-                  }
-                </td>
-                <td>
-                  {
-                    entry.foundationData.find(
-                      (d) => d.name === "Autizmus Alapitvany"
-                    ).value
-                  }
-                </td>
-                <td>
-                  {
-                    entry.foundationData.find(
-                      (d) => d.name === "Elelmiszer Bank Egyesulet"
-                    ).value
-                  }
-                </td>
-                <td>
-                  {
-                    entry.foundationData.find(
-                      (d) => d.name === "Lampas '97 Alapitvany"
-                    ).value
-                  }
-                </td>
+                {entry.foundationData.map((foundation) => (
+                  <td key={foundation.name}>
+                    {foundation.name === "Szent Istvan Kiraly Alapitvany" &&
+                      foundation.value}
+                    {foundation.name === "Autizmus Alapitvany" &&
+                      foundation.value}
+                    {foundation.name === "Elelmiszer Bank Egyesulet" &&
+                      foundation.value}
+                    {foundation.name === "Lampas '97 Alapitvany" &&
+                      foundation.value}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
         </table>
-        <div>
+        <div className="pagination">
           <button
-            onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 0}
+            onClick={() => setCurrentPage(currentPage - 1)}
           >
             Previous
           </button>
           <button
-            onClick={() => setCurrentPage(currentPage + 1)}
             disabled={endRow >= data.length}
+            onClick={() => setCurrentPage(currentPage + 1)}
           >
             Next
           </button>
@@ -134,5 +129,4 @@ function Data() {
     </div>
   );
 }
-
 export default Data;
