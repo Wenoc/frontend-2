@@ -1,5 +1,27 @@
 import { useState } from "react";
 import savedData from "../assets/kuldesek.json";
+import axios from "axios";
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import e from "express";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 interface FoundationData {
   name: string;
@@ -22,7 +44,7 @@ function Data() {
   const endRow = startRow + rowsPerPage;
 
   const sum: { [key: string]: number } = {};
-  data.forEach((item) => {
+  data.forEach((item, index) => {
     item.foundationData.forEach((foundation) => {
       const name = foundation.name;
       const value = foundation.value;
@@ -47,6 +69,36 @@ function Data() {
       );
     }
   };
+
+  const handleDelete = async (event) => {
+    const id = event.target.id;
+    try {
+      await axios.post("http://localhost:5000/delete", {
+        id,
+      });
+      console.log("Deleted")
+    } catch (error) {
+      console.error(error);
+    }
+    window.location.reload();
+  }
+
+
+  const labels = ['Szent Istvan Kiraly Alapitvany', 'Autizmus Alapitvany', 'Elelmiszer Bank Egyesulet', "Lampas '97 Alapitvany"];
+  const [chartData, setChartData] = useState({
+    labels: labels,
+    datasets: [{
+      label: 'Polok szama az alapitvanyoknak',
+      data: [sum["Szent Istvan Kiraly Alapitvany"], sum["Autizmus Alapitvany"], sum["Elelmiszer Bank Egyesulet"], sum["Lampas '97 Alapitvany"]],
+      backgroundColor: [
+        'rgb(153, 102, 255)'
+      ],
+      borderColor: [
+        'rgb(153, 102, 255)'
+      ],
+      borderWidth: 1
+    }]
+  });
 
   return (
     <div className="dataPage">
@@ -84,6 +136,7 @@ function Data() {
               <th>Autizmus Alapitvany</th>
               <th>Elelmiszer Bank Egyesulet</th>
               <th>Lampas '97 Alapitvany</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -107,6 +160,7 @@ function Data() {
                       foundation.value}
                   </td>
                 ))}
+                <td className="deleteRow"><span id={entry.time} onClick={handleDelete}>Del</span></td>
               </tr>
             ))}
           </tbody>
@@ -125,6 +179,8 @@ function Data() {
             Next
           </button>
         </div>
+
+        <Bar className="chart" data={chartData} />;
       </div>
     </div>
   );

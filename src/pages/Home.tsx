@@ -111,7 +111,7 @@ function Home() {
               resetSweaters={resetSweaters}
               callback={callback}
               name={foundation.name}
-              onData={(newData) =>
+              onData={(newData: string) =>
                 setShelfData((prevData) => {
                   const newDataArr = [...prevData];
                   newDataArr[index] = {

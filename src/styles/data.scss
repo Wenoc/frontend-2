@@ -7,7 +7,7 @@ th,
 td {
   text-align: left;
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #818181;
 }
 
 th {
@@ -19,4 +19,17 @@ th {
   font-size: 20px;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.788);
+}
+
+.chart{
+  max-width: 1000px;
+  max-height: 500px;
+}
+.deleteRow{
+  text-align: center;
+  color: rgb(173, 6, 6);
+
+  span:hover{
+    cursor: pointer;
+  }
 }
