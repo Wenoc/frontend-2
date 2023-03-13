@@ -17,12 +17,14 @@ function Home() {
   const [resetSweaters, setResetSweaters] = useState(false);
   const [callback, setCallback] = useState(false);
   const [shelfData, setShelfData] = useState([0, 0, 0, 0]);
+  const [isDraggingFromShelf, SetIsDraggingFromShelf] = useState(false);
 
   const handleSelectedSweaterUrlChange = (newUrl: any) => {
     setSelectedSweaterUrl(newUrl);
   };
 
   const handleResetSweaters = () => {
+    setSelectedSweaterUrl("")
     setSweaters(sweaterData);
     setResetSweaters(!resetSweaters);
   };
@@ -79,6 +81,27 @@ function Home() {
     setSaveD(true);
   };
 
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    SetIsDraggingFromShelf(false)
+    if (event.dataTransfer.getData("id") === "folded") {
+      const id = event.dataTransfer.getData("text").replace("folded", "sweater").slice(22);
+
+      sweaterData.forEach(sw => {
+        if(sw.url == id){
+          setSweaters(sweaters => [...sweaters, sw])
+        }
+      })
+    }
+  };
+
+  const enableDropping = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  const handleDragFromShelf =(value: boolean) => {
+    SetIsDraggingFromShelf(value)
+  }
+
   return (
     <div>
       <header>
@@ -86,29 +109,34 @@ function Home() {
       </header>
       <section className="main">
         <div className="akaszto">
-          <img className="akaszto-kep" src={akaszto} alt="" draggable="false" />
+          <img className="akaszto-kep"src={akaszto} alt=""/>
+          <div onDragOver={enableDropping} onDrop={handleDrop} className={(isDraggingFromShelf ? 'showLayer' : 'hideLayer')}></div>
           {sweaters.length == 0 && (
             <button className="sendBtn" onClick={saveData}>
               Elkuldes
             </button>
           )}
-          <div className="sweaters">
-            {sweaters.map((sweater) => (
+          <div className="sweaters" draggable={false}>
+            {sweaters.map((sweater, index) => (
               <Sweater
                 key={sweater.url}
                 url={sweater.url}
                 ml={sweater.ml}
                 pt={sweater.pt}
+                zi = {sweater.z}
               />
             ))}
           </div>
+          
         </div>
         <div className="shelves">
           {foundationsData.map((foundation, index) => (
             <Shelf
               key={index}
               onSelectedSweaterUrlChange={handleSelectedSweaterUrlChange}
+              sweatersOnAkaszto={sweaters}
               resetSweaters={resetSweaters}
+              handleDragFromShelf={handleDragFromShelf}
               callback={callback}
               name={foundation.name}
               onData={(newData: string) =>

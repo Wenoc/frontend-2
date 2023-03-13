@@ -12,11 +12,6 @@ body {
   padding: 0;
   margin: 0;
   background-color: #bddef4;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-drag: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
 }
 
 h1,
@@ -37,16 +32,29 @@ header {
   }
 }
 
+
 .akaszto {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 3rem 0;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 
   img {
     width: 1200px;
   }
+}
+
+.showLayer{
+  position: absolute;
+  height: 85%;
+  width: 100%;
+  z-index: 100;
 }
 
 .sendBtn {
@@ -90,10 +98,10 @@ header {
 }
 
 .shelves {
-  height: 340px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  height:380px;
 }
 
 .buttons {
@@ -104,6 +112,14 @@ header {
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 4rem;
+}
+
+.akaszto-kep{
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .clear {
@@ -129,5 +145,11 @@ header {
 @media (max-width: 1030px) {
   .akaszto {
     zoom: 62%;
+    padding-bottom: 16px;
+  }
+
+  .shelves{
+    flex-direction: column;
+    height: auto;
   }
 }

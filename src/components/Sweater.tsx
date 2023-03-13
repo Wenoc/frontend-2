@@ -4,9 +4,11 @@ function Sweater(props: any) {
   const url = props.url;
   const ml = props.ml;
   const pt = props.pt;
+  const zi = props.zi;
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
     event.dataTransfer.setData("text", url);
+    event.dataTransfer.setData("id", "unfolded");
   };
 
   return (
@@ -15,6 +17,7 @@ function Sweater(props: any) {
       style={{
         marginLeft: ml,
         paddingTop: pt,
+        zIndex: zi,
       }}
     >
       <div className="sweater">
