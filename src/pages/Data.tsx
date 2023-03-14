@@ -33,6 +33,7 @@ interface Entry {
 }
 
 function Data() {
+  // @ts-ignore
   const [data, setData] = useState<Entry[]>(null);
   const sum: { [key: string]: number } = {};
   const [foundationData, setFoundationData] = useState([0, 0, 0, 0]);

@@ -40,12 +40,14 @@ function Shelf(props: {
   }, [props.callback]);
 
   useEffect(() => {
+    // @ts-ignore
     const sweatersOnAkasztoUrls = [];
-    props.sweatersOnAkaszto.forEach((element) => {
+    props.sweatersOnAkaszto.forEach((element: { url: any }) => {
       sweatersOnAkasztoUrls.push(element.url);
     });
 
     const tempArray = sw_shelf.filter(
+      // @ts-ignore
       (el) => !sweatersOnAkasztoUrls.includes(el)
     );
 
