@@ -2,10 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import akaszto from "../assets/akaszto.png";
-import beige from "../assets/folded/sweater-beige.png";
 import foundationsData from "../assets/foundationsData.json";
 import headerImg from "../assets/headerImage2022.png";
-import beige2 from "../assets/sweater/sweater-beige.png";
 import sweaterData from "../assets/sweaterData.json";
 import Shelf from "../components/Shelf";
 import Sweater from "../components/Sweater";
@@ -109,13 +107,6 @@ function Home() {
 
   return (
     <div>
-      <div className="hide">
-        {sweaterData.map((image) => (
-          <img key={image.url} src={image.url} alt={image.url} />
-        ))}
-        <img src={beige} alt="" />
-        <img src={beige2} alt="" />
-      </div>
       <header>
         <img src={headerImg} alt="" draggable="false" />
       </header>
