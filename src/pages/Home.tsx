@@ -134,7 +134,7 @@ function Home() {
 
   return (
     <div>
-      <div className="hide">
+      <div>
         <img src={sB} alt="" />
         <img src={sBlue} alt="" />
         <img src={sBlue2} alt="" />
