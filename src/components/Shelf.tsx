@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import infoIcon from "../assets/infoIcon.png";
 import shelfImg from "../assets/shelf.png";
+import foldedSweatherSrc from "../assets/foldedSweaterdata.json"
 import "../styles/shelf.scss";
 import Popup from "./Popup";
 
@@ -19,6 +20,7 @@ function Shelf(props: {
   const [isHovered, SetIsHoevered] = useState(false);
   const [infoPopup, setInfoPopup] = useState(false);
 
+console.log
   const enableDropping = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
   };
@@ -40,12 +42,14 @@ function Shelf(props: {
   }, [props.callback]);
 
   useEffect(() => {
+    // @ts-ignore
     const sweatersOnAkasztoUrls = [];
-    props.sweatersOnAkaszto.forEach((element) => {
+    props.sweatersOnAkaszto.forEach((element: { url: any }) => {
       sweatersOnAkasztoUrls.push(element.url);
     });
 
     const tempArray = sw_shelf.filter(
+      // @ts-ignore
       (el) => !sweatersOnAkasztoUrls.includes(el)
     );
 
@@ -70,6 +74,7 @@ function Shelf(props: {
       document.body.classList.remove("no-scroll");
     }
   }, [infoPopup]);
+  
 
   return (
     <div
@@ -80,13 +85,13 @@ function Shelf(props: {
     >
       <div className="foldedSweaters">
         <img src={shelfImg} alt="" draggable="false" className="shelf-img" />
-        {sw_shelf.map((sw) => (
+        {sw_shelf.map((sw, index) => (
           <img
             className="folded"
             id={String(sw)}
             onDragStart={handleDragStart}
             key={String(sw)}
-            src={String(sw).replace("sweater", "folded")}
+            src={(String(sw).replace("sweater", "folded"))}
             draggable={true}
           />
         ))}
