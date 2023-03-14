@@ -113,6 +113,8 @@ function Home() {
         {sweaterData.map((image) => (
           <img key={image.url} src={image.url} alt={image.url} />
         ))}
+        <img src={beige} alt="" />
+        <img src={beige2} alt="" />
       </div>
       <header>
         <img src={headerImg} alt="" draggable="false" />
