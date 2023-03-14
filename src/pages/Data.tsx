@@ -33,7 +33,6 @@ interface Entry {
 }
 
 function Data() {
-  // @ts-ignore
   const [data, setData] = useState<Entry[]>(null);
   const sum: { [key: string]: number } = {};
   const [foundationData, setFoundationData] = useState([0, 0, 0, 0]);
@@ -42,9 +41,7 @@ function Data() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get(
-          "https://shark-app-vzulz.ondigitalocean.app/data"
-        );
+        const res = await axios.get("http://165.22.23.123/data");
         const d = res.data;
         setData(d);
       } catch (error) {

@@ -138,6 +138,8 @@ function Home() {
         <div className="shelves">
           {foundationsData.map((foundation, index) => (
             <Shelf
+              website={foundation.website}
+              description={foundation.description}
               key={index}
               onSelectedSweaterUrlChange={handleSelectedSweaterUrlChange}
               sweatersOnAkaszto={sweaters}
@@ -148,7 +150,6 @@ function Home() {
               onData={(newData: string) =>
                 setShelfData((prevData) => {
                   const newDataArr = [...prevData];
-                  // @ts-ignore
                   newDataArr[index] = {
                     name: foundationsData[index].name,
                     value: newData,

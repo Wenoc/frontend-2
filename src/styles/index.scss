@@ -32,7 +32,6 @@ header {
   }
 }
 
-
 .akaszto {
   position: relative;
   width: 100%;
@@ -50,7 +49,7 @@ header {
   }
 }
 
-.showLayer{
+.showLayer {
   position: absolute;
   height: 85%;
   width: 100%;
@@ -101,7 +100,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height:380px;
+  height: 380px;
 }
 
 .buttons {
@@ -114,16 +113,12 @@ header {
   margin-bottom: 4rem;
 }
 
-.akaszto-kep{
+.akaszto-kep {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
-}
-
-.hide {
-  display: none;
 }
 
 .clear {
@@ -146,14 +141,16 @@ header {
   }
 }
 
-@media (max-width: 1030px) {
+@media (max-width: 1070px) {
   .akaszto {
     zoom: 62%;
     padding-bottom: 16px;
   }
 
-  .shelves{
+  .shelves {
     flex-direction: column;
     height: auto;
+    justify-content: center;
+    align-items: center;
   }
 }
