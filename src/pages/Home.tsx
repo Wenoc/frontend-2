@@ -150,6 +150,7 @@ function Home() {
               onData={(newData: string) =>
                 setShelfData((prevData) => {
                   const newDataArr = [...prevData];
+                  // @ts-ignore
                   newDataArr[index] = {
                     name: foundationsData[index].name,
                     value: newData,
