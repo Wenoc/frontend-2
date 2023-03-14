@@ -42,7 +42,9 @@ function Data() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get("http://165.22.23.123/data");
+        const res = await axios.get(
+          "https://shark-app-vzulz.ondigitalocean.app/data"
+        );
         const d = res.data;
         setData(d);
       } catch (error) {
