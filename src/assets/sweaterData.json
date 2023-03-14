@@ -1,72 +1,84 @@
 [
     {
-        "url" : "src/assets/sweater/sweater-blue2.png",
+        "id" : "beige",
+        "url" : "https://i.imgur.com/5EBaQmP.png",
         "ml" : "0px",
         "pt" : "0px",
         "z" : "1"
     },
     {
-        "url" : "src/assets/sweater/sweater-darkgreen.png",
+        "id" : "blue",
+        "url" : "https://i.imgur.com/POADsI4.png",
         "ml" : "78px",
         "pt" : "0px",
         "z" : "2"
     },
     {
-        "url" : "src/assets/sweater/sweater-white2.png",
+        "id" : "blue2",
+        "url" : "https://i.imgur.com/bFaNdsS.png",
         "ml" : "178px",
         "pt" : "0px",
         "z" : "3"
     },
     {
-        "url" : "src/assets/sweater/sweater-red.png",
+        "id" : "darkgreen",
+        "url" : "https://i.imgur.com/aU4EKPo.png",
         "ml" : "267px",
         "pt" : "12px",
         "z" : "4"
     },
     {
-        "url" : "src/assets/sweater/sweater-lightgreen.png",
+        "id" : "green",
+        "url" : "https://i.imgur.com/BKpi1Aw.png",
         "ml" : "350px",
         "pt" : "12px",
         "z" : "5"
     },
     {
-        "url" : "src/assets/sweater/sweater-white.png",
+        "id" : "green2",
+        "url" : "https://i.imgur.com/XB0I34w.png",
         "ml" : "454px",
         "pt" : "0px",
         "z" : "6"
     },
     {
+        "id" : "lightblue",
         "url" : "https://i.imgur.com/I97KkaG.png",
         "ml" : "540px",
         "pt" : "16px",
         "z" : "7"
     },
     {
-        "url" : "src/assets/sweater/sweater-green.png",
+        "id" : "lightgreen",
+        "url" : "https://i.imgur.com/fP1xsg1.png",
         "ml" : "630px",
         "pt" : "6px",
         "z" : "8"
     },
     {
-        "url" : "src/assets/sweater/sweater-maroon.png",
+        "id" : "maroon",
+        "url" : "https://i.imgur.com/Thbmlk7.png",
         "ml" : "724px",
         "pt" : "0px",
         "z" : "9"
     },
     {
-        "url" : "src/assets/sweater/sweater-green2.png",
+        "id" : "red",
+        "url" : "https://i.imgur.com/5N74JNG.png",
         "ml" : "808px",
         "pt" : "14px",
         "z" : "10"
     },
     {
-        "url" : "src/assets/sweater/sweater-blue.png",
+        "id" : "white",
+        "url" : "https://i.imgur.com/zMIdKq8.png",
         "ml" : "898px",
         "pt" : "16px",
         "z" : "11"
     },
     {
-        "url" : "src/assets/sweater/sweater-lightblue.png",
+        "id" : "white2",
+        "url" : "https://i.imgur.com/IbtcnKq.png",
         "ml" : "997px",
         "pt" : "16px",
         "z" : "12"
