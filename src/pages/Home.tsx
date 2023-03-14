@@ -9,32 +9,6 @@ import Shelf from "../components/Shelf";
 import Sweater from "../components/Sweater";
 import "../styles/data.scss";
 
-import sB from "../assets/sweater/sweater-beige.png"
-import sBlue from "../assets/sweater/sweater-blue.png"
-import sBlue2 from "../assets/sweater/sweater-blue2.png"
-import sD from "../assets/sweater/sweater-darkgreen.png"
-import sG from "../assets/sweater/sweater-green.png"
-import sG2 from "../assets/sweater/sweater-green2.png"
-import sL from "../assets/sweater/sweater-lightblue.png"
-import sLG from "../assets/sweater/sweater-lightgreen.png"
-import sM from "../assets/sweater/sweater-maroon.png"
-import sR from "../assets/sweater/sweater-red.png"
-import sW from "../assets/sweater/sweater-white.png"
-import sW2 from "../assets/sweater/sweater-white2.png"
-
-import fB from "../assets/folded/sweater-beige.png"
-import fBlue from "../assets/folded/sweater-blue.png"
-import fBlue2 from "../assets/folded/sweater-blue2.png"
-import fD from "../assets/folded/sweater-darkgreen.png"
-import fG from "../assets/folded/sweater-green.png"
-import fG2 from "../assets/folded/sweater-green2.png"
-import fL from "../assets/folded/sweater-lightblue.png"
-import fLG from "../assets/folded/sweater-lightgreen.png"
-import fM from "../assets/folded/sweater-maroon.png"
-import fR from "../assets/folded/sweater-red.png"
-import fW from "../assets/folded/sweater-white.png"
-import fW2 from "../assets/folded/sweater-white2.png"
-
 function Home() {
   const [saveD, setSaveD] = useState(false);
 
@@ -134,32 +108,6 @@ function Home() {
 
   return (
     <div>
-      <div>
-        <img src={sB} alt="" />
-        <img src={sBlue} alt="" />
-        <img src={sBlue2} alt="" />
-        <img src={sD} alt="" />
-        <img src={sG} alt="" />
-        <img src={sG2} alt="" />
-        <img src={sL} alt="" />
-        <img src={sLG} alt="" />
-        <img src={sM} alt="" />
-        <img src={sR} alt="" />
-        <img src={sW} alt="" />
-        <img src={sW2} alt="" />
-        <img src={fB} alt="" />
-        <img src={fBlue} alt="" />
-        <img src={fBlue2} alt="" />
-        <img src={fD} alt="" />
-        <img src={fG} alt="" />
-        <img src={fG2} alt="" />
-        <img src={fL} alt="" />
-        <img src={fLG} alt="" />
-        <img src={fM} alt="" />
-        <img src={fR} alt="" />
-        <img src={fW} alt="" />
-        <img src={fW2} alt="" />
-      </div>
       <header>
         <img src={headerImg} alt="" draggable="false" />
       </header>
