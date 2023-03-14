@@ -138,8 +138,6 @@ function Home() {
         <div className="shelves">
           {foundationsData.map((foundation, index) => (
             <Shelf
-              website={foundation.website}
-              description={foundation.description}
               key={index}
               onSelectedSweaterUrlChange={handleSelectedSweaterUrlChange}
               sweatersOnAkaszto={sweaters}

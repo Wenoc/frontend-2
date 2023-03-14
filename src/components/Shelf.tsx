@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import infoIcon from "../assets/infoIcon.png";
 import shelfImg from "../assets/shelf.png";
 import foldedSweatherSrc from "../assets/foldedSweaterdata.json"
 import "../styles/shelf.scss";
-import Popup from "./Popup";
 
 function Shelf(props: {
   callback: boolean;
@@ -11,15 +9,16 @@ function Shelf(props: {
   onSelectedSweaterUrlChange: Function;
   resetSweaters: boolean;
   name: string;
-  description: string;
-  website: string;
   sweatersOnAkaszto: any;
   handleDragFromShelf: Function;
 }) {
   const [sw_shelf, set_sw_shelf] = useState(Array);
+<<<<<<< HEAD
   const [isHovered, SetIsHoevered] = useState(false);
   const [infoPopup, setInfoPopup] = useState(false);
   const [sweaterSources, SetsweaterSources] = useState(Array);
+=======
+>>>>>>> parent of 8099257... info button, website, see clothes on hover
 
 console.log(sw_shelf)
   const enableDropping = (event: React.DragEvent<HTMLDivElement>) => {
@@ -45,6 +44,7 @@ console.log(sw_shelf)
   useEffect(() => {
     // @ts-ignore
     const sweatersOnAkasztoUrls = [];
+<<<<<<< HEAD
     props.sweatersOnAkaszto.forEach((element: { url: any }) => {
       sweatersOnAkasztoUrls.push(element.url);
     });
@@ -53,10 +53,18 @@ console.log(sw_shelf)
       // @ts-ignore
       (el) => !sweatersOnAkasztoUrls.includes(el)
     );
+=======
+    props.sweatersOnAkaszto.forEach(element => {
+      sweatersOnAkasztoUrls.push(element.url)
+    });
+
+    const tempArray = sw_shelf.filter( ( el ) => !sweatersOnAkasztoUrls.includes( el ) );
+>>>>>>> parent of 8099257... info button, website, see clothes on hover
 
     props.onSelectedSweaterUrlChange("");
 
-    set_sw_shelf(tempArray);
+    set_sw_shelf(tempArray)
+
   }, [props.sweatersOnAkaszto]);
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
@@ -64,6 +72,7 @@ console.log(sw_shelf)
     props.handleDragFromShelf(true);
   };
 
+<<<<<<< HEAD
   const closePopup = () => {
     setInfoPopup(false);
   };
@@ -77,18 +86,20 @@ console.log(sw_shelf)
   }, [infoPopup]);
   
 
+=======
+>>>>>>> parent of 8099257... info button, website, see clothes on hover
   return (
-    <div
-      className={"shelf"}
-      onDragOver={enableDropping}
-      onDrop={handleDrop}
-      onDragEnd={() => props.handleDragFromShelf(false)}
-    >
+    <div className={"shelf"} onDragOver={enableDropping} onDrop={handleDrop} onDragEnd={() => props.handleDragFromShelf(false)}>
       <div className="foldedSweaters">
+<<<<<<< HEAD
         <img src={shelfImg} alt="" draggable="false" className="shelf-img" />
         {sw_shelf.map((sw, index) => (
+=======
+      <img src={shelfImg} alt="" draggable="false" className="shelf-img"/>
+        {sw_shelf.map((sw) => (
+>>>>>>> parent of 8099257... info button, website, see clothes on hover
           <img
-            className="folded"
+          className="folded"
             id={String(sw)}
             onDragStart={handleDragStart}
             key={String(sw)}
@@ -97,39 +108,8 @@ console.log(sw_shelf)
           />
         ))}
       </div>
-      <p
-        className="num"
-        onMouseEnter={() => SetIsHoevered(true)}
-        onMouseLeave={() => SetIsHoevered(false)}
-      >
-        {sw_shelf.length}
-      </p>
-      <span>
-        <span className={isHovered ? "showPopup" : "hidePopup"}>
-          {sw_shelf.length != 0 && <Popup sweaters={sw_shelf} />}
-        </span>
-      </span>
+      <p className="num">{sw_shelf.length}</p>
       <p className="alapitvany">{props.name}</p>
-      <div className="infoContainer">
-        <div className="website">
-          <span>{props.website}</span>
-        </div>
-        <div className="infoBtn" onClick={() => setInfoPopup(true)}>
-          <img src={infoIcon} alt="" />
-        </div>
-
-        {infoPopup && (
-          <div className="infoPopup">
-            <div className="InfoPopupContent">
-              <div className="popupClose" onClick={closePopup}>
-                X
-              </div>
-              <h2>{props.name}</h2>
-              <p>{props.description}</p>
-            </div>
-          </div>
-        )}
-      </div>
     </div>
   );
 }
