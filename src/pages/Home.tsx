@@ -109,7 +109,6 @@ function Home() {
   return (
     <div>
       <header>
-        <img src={headerImg} alt="" draggable="false" />
       </header>
       <section className="main">
         <div className="akaszto">

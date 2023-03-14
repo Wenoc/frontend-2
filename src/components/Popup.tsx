@@ -4,7 +4,7 @@ function Popup({ sweaters }) {
   return (
     <div className="popup">
       {sweaters.map((sw :any ) => (
-        <img src={sw} alt="" />
+        <img key={sw} src={sw} alt="" />
       ))}
     </div>
   );

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import infoIcon from "../assets/infoIcon.png";
+import linkIcon from "../assets/linkIcon.png";
 import shelfImg from "../assets/shelf.png";
-import foldedSweatherSrc from "../assets/foldedSweaterdata.json"
+import { Link } from "react-router-dom";
 import "../styles/shelf.scss";
 import Popup from "./Popup";
+//@ts-ignore
+import useWindowSize from '../hooks/useWindowSize.js'
 
 function Shelf(props: {
   callback: boolean;
@@ -16,6 +19,9 @@ function Shelf(props: {
   sweatersOnAkaszto: any;
   handleDragFromShelf: Function;
 }) {
+
+  const size = useWindowSize()
+
   const [sw_shelf, set_sw_shelf] = useState(Array);
   const [isHovered, SetIsHoevered] = useState(false);
   const [infoPopup, setInfoPopup] = useState(false);
@@ -110,13 +116,16 @@ console.log
       </span>
       <p className="alapitvany">{props.name}</p>
       <div className="infoContainer">
-        <div className="website">
+
+
+      {size.width > 1070 &&         <Link target="_blank" to={"https://" + props.website}><div className="website">
           <span>{props.website}</span>
-        </div>
+        </div> </Link>}
+
         <div className="infoBtn" onClick={() => setInfoPopup(true)}>
           <img src={infoIcon} alt="" />
         </div>
-
+        
         {infoPopup && (
           <div className="infoPopup">
             <div className="InfoPopupContent">
@@ -129,6 +138,7 @@ console.log
           </div>
         )}
       </div>
+      {size.width < 1070 && <Link target="_blank" to={"https://" + props.website}><img className="linkIcon" src={linkIcon} /> </Link>}
     </div>
   );
 }

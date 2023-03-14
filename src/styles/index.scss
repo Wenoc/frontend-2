@@ -24,7 +24,6 @@ header {
   width: 100%;
   margin: 0 auto;
   max-height: 800px;
-  max-width: 2000px;
 
   img {
     width: 100%;
@@ -77,6 +76,16 @@ header {
 
 .hide{
   display: none;
+}
+
+header{
+  background: url('src/assets/headerImage2022.png');
+  min-height: 600px;
+  max-width: 1900px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin:  0 auto;
 }
 
 .sweaters {
@@ -136,6 +145,18 @@ header {
   &:hover {
     background-color: rgb(202, 5, 5);
     cursor: pointer;
+  }
+}
+
+
+@media(max-width: 1900px){
+  header{
+    background: url('src/assets/headerImage2022_small.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    max-width: 1200px;
+    min-height: 700px;
   }
 }
 
